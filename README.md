@@ -11,9 +11,9 @@ The goal is to create a simple app for users to browse github repos and tag thos
   - List all repos bookmarked by user (should be searchable and can be sorted by
     time added)
   - Clicking on the repo should show:
-    i. Last 5 open issues along with users that created the issue
-    ii. Clicking on the user, should show user’s avatar + location (if specified)
-    iii. Clicking on location should open maps and show navigation between app user’s current location and the github user’s location
+    - Last 5 open issues along with users that created the issue
+    - Clicking on the user, should show user’s avatar + location (if specified)
+    - Clicking on location should open maps and show navigation between app user’s current location and the github user’s location
 
 - Location access be via native android module.
 
