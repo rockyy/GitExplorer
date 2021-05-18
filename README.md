@@ -19,6 +19,44 @@ The goal is to create a simple app for users to browse github repos and tag thos
 
 ## Installation
 
+```
+$ yarn
+```
+
+Or:
+
+```
+$ npm install
+```
+
+# Usage
+
+The first build must be through USB connection, so connect your device (or just open your emulator) and run:
+
+```
+$ yarn react-native run-android
+```
+
+Or
+
+```
+$ npx react-native run-android
+```
+
+In the next times you can just run the Metro Bundler server:
+
+```
+$ yarn start
+```
+
+Or:
+
+```
+$ npm run start
+```
+
+> See for more information in [Running On Device](https://reactnative.dev/docs/running-on-device).
+
 ## License
 
 MIT
