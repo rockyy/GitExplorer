@@ -30,28 +30,20 @@ const mapDispatchToProps = dispatch => {
 
 const LoginView = ({name, getUserLogin}) => {
   const [email, setEmail] = useState({value: '', error: ''});
-  const [password, setPassword] = useState('');
-  const [, updateState] = useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+  const [password, setPassword] = useState({value: '', error: ''});
 
-  var emailError = '';
-  var passwordError = '';
-  useEffect(() => {
-    console.log(` LoginView useEffect :>> ${email}`);
-    console.log(` Errors  :>> ${emailError}  ${passwordError}`);
-  }, [name]);
+  useEffect(() => {}, []);
+
   const onLoginPressed = () => {
-    console.log(`onLoginPressed `);
-
-    emailError = emailValidator(email);
-    passwordError = passwordValidator(password);
+    let emailError = emailValidator(email.value);
+    let passwordError = passwordValidator(password.value);
     if (emailError || passwordError) {
-      console.log(`onLoginPressed ERROR ${emailError}  ${passwordError}`);
-      forceUpdate();
+      setEmail({...email, error: emailError});
+      setPassword({...password, error: passwordError});
       return;
     }
 
-    const param = {email: email, password: password};
+    const param = {email: email.value, password: password.value};
     getUserLogin(param);
   };
 
@@ -59,15 +51,23 @@ const LoginView = ({name, getUserLogin}) => {
 
   const resetPasswordPress = () => {};
 
+  const emailSetter = email => {
+    setEmail({value: email, error: ''});
+  };
+
+  const passwordSetter = password => {
+    setPassword({value: password, error: ''});
+  };
+
   return (
     <Background>
       <TextInput
         placeholder="Email"
         returnKeyType="next"
-        value={email}
-        onChangeText={text => setEmail(text)}
-        error={!!emailError}
-        errorText={emailError}
+        value={email.value}
+        onChangeText={text => emailSetter(text)}
+        error={!!email.error}
+        errorText={email.error}
         autoCapitalize="none"
         autoCompleteType="email"
         textContentType="emailAddress"
@@ -77,9 +77,9 @@ const LoginView = ({name, getUserLogin}) => {
         placeholder="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword(text)}
-        error={!!passwordError}
-        errorText={passwordError}
+        onChangeText={text => passwordSetter(text)}
+        error={!!password.error}
+        errorText={password.error}
         secureTextEntry
       />
       <View style={styles.forgotPassword}>
@@ -95,7 +95,7 @@ const LoginView = ({name, getUserLogin}) => {
       />
 
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text>Don’t have an account?</Text>
         <TouchableOpacity onPress={onRegisterPress}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
